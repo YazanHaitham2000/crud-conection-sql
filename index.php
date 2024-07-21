@@ -1,19 +1,19 @@
 <?php
-// Database configuration
-$servername = "localhost";
-$username = "dbyazan"; // Replace with your MySQL username
-$password = "0000"; // Replace with your MySQL password
-$dbname = "yazan"; // Replace with your database name
 
-// Create connection
+$servername = "localhost";
+$username = "dbyazan"; 
+$password = "0000"; 
+$dbname = "yazan"; 
+
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle deletion
+
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "DELETE FROM Employees WHERE id=$id";
@@ -25,18 +25,18 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
     }
 }
 
-// Handle creation and updating
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $address = $_POST['address'];
     $salary = $_POST['salary'];
 
     if (isset($_POST['id'])) {
-        // Update existing record
+
         $id = $_POST['id'];
         $sql = "UPDATE Employees SET Name='$name', Address='$address', Salary='$salary' WHERE id=$id";
     } else {
-        // Insert new record
+
         $sql = "INSERT INTO Employees (Name, Address, Salary) VALUES ('$name', '$address', '$salary')";
     }
 
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Retrieve employee for update
+
 if (isset($_GET['action']) && $_GET['action'] == 'update' && isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT id, Name, Address, Salary FROM Employees WHERE id=$id";
@@ -61,7 +61,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'update' && isset($_GET['id']))
     }
 }
 
-// Retrieve all employees
+
 $sql = "SELECT id, Name, Address, Salary FROM Employees";
 $result = $conn->query($sql);
 ?>
